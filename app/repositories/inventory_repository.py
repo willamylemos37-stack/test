@@ -1,0 +1,6 @@
+from __future__ import annotations
+from typing import Protocol
+class InventoryRepository(Protocol):
+    """Contrato para reserva atômica; implementação PostgreSQL deve bloquear linhas."""
+    def reserve_atomically(self, company_id:int, allocations:list[tuple[int,object]], reference:str): ...
+    def consume_reservation_atomically(self, company_id:int, reservation_id:int, reference:str): ...
